@@ -97,12 +97,11 @@ const sculptureList = [
     alt: "A group of bronze hippo sculptures emerging from the sett sidewalk as if they were swimming.",
   },
 ];
-
 function Gallery() {
   let [index, setIndex] = React.useState(0);
   let [description, showDescription] = React.useState(false);
   let hasNext = index < sculptureList.length - 1;
-  let totalLength= Number(sculptureList.length -1)
+  let totalLength = Number(sculptureList.length - 1);
   function handleNextSculpture() {
     if (hasNext) {
       setIndex(index + 1);
@@ -113,7 +112,9 @@ function Gallery() {
   function handleLastSculpture() {
     if (index === 0) {
       setIndex(totalLength);
-    } else{setIndex(index-1)}
+    } else {
+      setIndex(index - 1);
+    }
   }
 
   function handleMoreInfo() {
@@ -122,7 +123,7 @@ function Gallery() {
   let actualSculpture = sculptureList[index];
   return (
     <>
-        <del>hola</del>
+      <del>hola</del>
       <button onClick={handleLastSculpture}>Last</button>
       <button onClick={handleNextSculpture}>Next</button>
       <h1>{actualSculpture.name}</h1>
@@ -139,5 +140,51 @@ function Gallery() {
   );
 }
 
+function Chat() {
+  let [to, setTo] = React.useState("");
+  let [message, setMessage] = React.useState("");
+
+  function handleSubmit(e) {
+    e.preventDefault();
+    alert(`this message ${message} was sent to ${to}`);
+  }
+  return (
+    <form onSubmit={handleSubmit}>
+      <label>
+        To:
+        <select
+          value={to}
+          onChange={(e) => {
+            setTo(e.target.value);
+          }}
+        >
+          <option value="Juan"> Juan </option>
+          <option value="Aleja"> Aleja </option>
+        </select>
+      </label>
+      <input
+        type="text"
+        placeHolder="Message"
+        value={message}
+        onChange={(e) => {
+          setMessage(e.target.value);
+        }}
+      />
+      <input type="submit" />
+    </form>
+  );
+}
+
+function App() {
+  return (
+    <main>
+      <Gallery />
+      <section>
+        <Chat />
+      </section>
+    </main>
+  );
+}
+
 const root = ReactDOM.createRoot(app);
-root.render(<Gallery />);
+root.render(<App />);
