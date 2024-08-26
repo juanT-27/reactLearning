@@ -1,4 +1,5 @@
 const app = document.querySelector("#app");
+
 const sculptureList = [
   {
     name: "Homenaje a la Neurocirugía",
@@ -140,38 +141,59 @@ function Gallery() {
   );
 }
 
+function ChatHistory({ history }) {
+  return (
+    <>
+      {history.map((message, idx) => (
+        <div key={idx + "msg"}>
+          <b>
+            <p>to:{message.destinatary}</p>
+          </b>{" "}
+          <p>{message.text}</p>
+        </div>
+      ))}
+    </>
+  );
+}
+
 function Chat() {
-  let [to, setTo] = React.useState("");
+  let [to, setTo] = React.useState("Juan");
   let [message, setMessage] = React.useState("");
+  let [messageHistory, setHistory] = React.useState([]);
 
   function handleSubmit(e) {
     e.preventDefault();
-    alert(`this message ${message} was sent to ${to}`);
+    let newMessage = { destinatary: to, text: message };
+    setHistory([...messageHistory, newMessage]);
   }
   return (
-    <form onSubmit={handleSubmit}>
-      <label>
-        To:
-        <select
-          value={to}
+    <>
+      <form onSubmit={handleSubmit}>
+        <label>
+          To:
+          <select
+            value={to}
+            onChange={(e) => {
+              setTo(e.target.value);
+            }}
+          >
+            <option value="Juan"> Juan </option>
+            <option value="Aleja"> Aleja </option>
+          </select>
+        </label>
+        <input
+          type="text"
+          className="inputMsg"
+          placeholder="Message"
+          value={message}
           onChange={(e) => {
-            setTo(e.target.value);
+            setMessage(e.target.value);
           }}
-        >
-          <option value="Juan"> Juan </option>
-          <option value="Aleja"> Aleja </option>
-        </select>
-      </label>
-      <input
-        type="text"
-        placeHolder="Message"
-        value={message}
-        onChange={(e) => {
-          setMessage(e.target.value);
-        }}
-      />
-      <input type="submit" />
-    </form>
+        />
+        <input type="submit" />
+      </form>
+      <ChatHistory history={messageHistory} />
+    </>
   );
 }
 
