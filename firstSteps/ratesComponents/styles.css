@@ -1,0 +1,75 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+.hide{
+  visibility: hidden;
+}
+button{
+    border: none;
+    cursor:pointer;
+}
+
+main {
+  background-color: #8181ff;
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.rateComponent {
+  width: 20rem;
+  border-radius: 1rem;
+  padding: 3rem;
+  background-color: rgb(40, 37, 37);
+  color: white;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  text-align: center;
+}
+
+.rating-btns button{
+    width: 2rem;
+    height: 2rem;
+    margin: 0 1rem;
+    border-radius: 50%;
+    text-align: center;
+    
+}
+
+.rating-container button:focus{
+    background-color: orange;
+}
+
+section{
+  margin: 2rem 0;
+}
+
+.product{
+  width: 15rem;
+  max-width: 80%;
+  margin: 1rem;
+  padding: 2rem 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: white;
+}
+
+.product button{
+  width: 4rem;
+  height: 2rem;
+  margin-top: 1rem;
+  background-color:#8181ff ;
+  background-image: url(imgs/star-regular.svg);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: 30%;
+  
+  
+}
