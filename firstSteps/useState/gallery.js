@@ -124,7 +124,7 @@ function Gallery() {
   let actualSculpture = sculptureList[index];
   return (
     <>
-      <del>hola</del>
+
       <button onClick={handleLastSculpture}>Last</button>
       <button onClick={handleNextSculpture}>Next</button>
       <h1>{actualSculpture.name}</h1>
