@@ -6,16 +6,34 @@ let dbProducts = [
   { id: "laptop", rate: [] },
 ];
 
-function RateInformation({ product }) {
+function StarImgs({ units }) {
+  let arrOfUnits = Array.from({ length: units }, (v, i) => i);
+
+  return arrOfUnits.map((val) => (
+    <img
+      key={val + "imgStar"}
+      className="starImage"
+      src="imgs/star-regular.svg"
+    />
+  ));
+}
+
+function RateInformation({ product, onClose }) {
   return (
     <div className="modal flex-full-center" id="modal">
-      <div className="rateInfo">
+      <button onClick={() => onClose(null)}></button>
+      <div className="rateInfo flex-full-center">
         <h1>Product: {product.id}</h1>
+        <h3>total reviews {product.rate.length}</h3>
         <ul>
           {product.rate.length === 0 ? (
             <h3>0 REVIEWS</h3>
           ) : (
-            product.rate.map((r, idx) => <li key={idx + "review"} className="reviewItem">{r} <img src="imgs/star-regular.svg" /></li>)
+            product.rate.map((r, idx) => (
+              <li key={idx + "review"} className="reviewItem">
+                {r} <StarImgs units={r} />
+              </li>
+            ))
           )}
         </ul>
       </div>
@@ -31,8 +49,8 @@ function ProductsList({ list, OnClick }) {
   }
 
   return (
-    <>
-      <ul>
+    <section className="flex-full-center">
+      <ul className="productList flex-full-center">
         {list.map((el, idx) => (
           <li key={el.id + idx} className="product">
             {el.id} let your review
@@ -49,8 +67,12 @@ function ProductsList({ list, OnClick }) {
         ))}
       </ul>
 
-      {!productInModal ? "" : <RateInformation product={productInModal} />}
-    </>
+      {!productInModal ? (
+        ""
+      ) : (
+        <RateInformation product={productInModal} onClose={handleModal} />
+      )}
+    </section>
   );
 }
 
@@ -76,9 +98,9 @@ function RatesForm({ product, submit }) {
     <div className={`rateComponent ${product ? "" : "hide"}`}>
       <h1>how good do you think our {product ? product.id : ""} is?</h1>
       <p>It is important for us to know your calification </p>
-      <div>
+    
         <RatesBtns submited={submit} product={product} />
-      </div>
+      
     </div>
   );
 }
